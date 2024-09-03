@@ -10,19 +10,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class TopicHandler {
-  private static final String TOPIC = "mytopic";
+public class Topic1Handler extends BaseTopicHandler {
+  private static final String TOPIC = "topic1";
   private final KafkaTemplate<String, String> template;
 
-  private final Logger logger = LoggerFactory.getLogger(TopicHandler.class);
+  private final Logger logger = LoggerFactory.getLogger(Topic1Handler.class);
 
   @Autowired
-  public TopicHandler(KafkaTemplate<String, String> template) {
+  public Topic1Handler(KafkaTemplate<String, String> template) {
     this.template = template;
-  }
-
-  private static String processMessage(String rawMessage) {
-    return rawMessage.toUpperCase();
   }
 
   @PostMapping("/")
@@ -31,7 +27,7 @@ public class TopicHandler {
   }
 
   @KafkaListener(topics = TOPIC, groupId = "default")
-  public void consume(String in) {
-    logger.info(processMessage(in));
+  public void consume(String message) {
+    logger.info(message.toUpperCase());
   }
 }

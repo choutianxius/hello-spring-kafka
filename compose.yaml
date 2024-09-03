@@ -14,22 +14,24 @@ services:
 
   kafka-init:
     image: bitnami/kafka:latest
-    command: "/bin/sh /opt/bitnami/kafka/bin/kafka-topics.sh --create --topic mytopic --bootstrap-server kafka:9092"
+    volumes:
+      - ./scripts:/scripts
+    command: [ "/usr/bin/bash", "/scripts/init-kafka-topics.sh" ]
     init: true
     depends_on:
       kafka:
         condition: service_started
 
-#  valkey:
-#    image: bitnami/valkey:latest
-#    environment:
-#      - VALKEY_PASSWORD=${VALKEY_PASSWORD}
-#    ports:
-#      - 6379:6379
+  #  valkey:
+  #    image: bitnami/valkey:latest
+  #    environment:
+  #      - VALKEY_PASSWORD=${VALKEY_PASSWORD}
+  #    ports:
+  #      - 6379:6379
 
   test-app:
     image: alpine:latest
-    command: ["echo", "Success!"]
+    command: [ "echo", "Success!" ]
     init: true
     depends_on:
       kafka-init:
