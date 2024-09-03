@@ -6,9 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class HelloSpringKafkaApplication {
 
-	public static void main(String[] args) {
-		System.out.println("Hi, Spring Kafka!");
-		SpringApplication.run(HelloSpringKafkaApplication.class, args);
-	}
-
+  public static void main(String[] args) {
+    System.out.println("Hi, Spring Kafka!");
+    SpringApplication.run(HelloSpringKafkaApplication.class, args);
+  }
 }
