@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-declare -a topics=("topic1" "topic2")
+declare -a topics=("gps")
 
 for topic in "${topics[@]}"
 do

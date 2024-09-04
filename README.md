@@ -1,6 +1,12 @@
 # A Project for Learning Spring for Apache Kafka
 
-This project implements a system using [Spring for Apache Kafka](https://spring.io/projects/spring-kafka), achieving the following features:
+Imagine a health-keeping system to provide activity suggestions for users, supporting the following features:
 
-- (Topic 1) Receive raw messages, which represent some activity record, from HTTP POST requests and put them into the Kafka queue;
-- (Topic 2) Upon receiving a valid message from topic 1, asynchronously perform some data fetching from a fake data store. The fetched data are placed in a Redis cache, and when all message for one record are received, persist the record in a database.
+- Monitoring users' GPS locations, receiving them through HTTP post requests;
+- Upon receiving GPS messages, fetch the weather condition forecast of the user's current location, from a third-party
+  REST API;
+- Upon receiving GPS messages, fetch the user's physical monitoring data, which is obtained by a third-party wearable
+  device and dumped into some AWS S3 bucket.
+
+This project implements such a system using [Spring for Apache Kafka](https://spring.io/projects/spring-kafka)
+and [Redis]();
