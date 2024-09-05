@@ -22,19 +22,11 @@ services:
       kafka:
         condition: service_started
 
-  #  valkey:
-  #    image: bitnami/valkey:latest
-  #    environment:
-  #      - VALKEY_PASSWORD=${VALKEY_PASSWORD}
-  #    ports:
-  #      - 6379:6379
-
-  test-app:
-    image: alpine:latest
-    command: [ "echo", "Success!" ]
-    init: true
+  app:
+    build:
+      dockerfile: ./Dockerfile
+    ports:
+      - "8080:8080"
     depends_on:
       kafka-init:
         condition: service_completed_successfully
-#      valkey:
-#        condition: service_started
