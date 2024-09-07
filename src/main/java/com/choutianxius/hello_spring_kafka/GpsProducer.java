@@ -10,24 +10,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class GpsProducer implements BaseProducer {
+public class GpsProducer implements BaseProducer<String, GpsMessage> {
   private static final String TOPIC = "gps";
   private static final Logger logger = LoggerFactory.getLogger(GpsProducer.class);
-  private final KafkaTemplate<String, String> template;
+  private final KafkaTemplate<String, GpsMessage> template;
 
   @Autowired
-  public GpsProducer(KafkaTemplate<String, String> template) {
+  public GpsProducer(KafkaTemplate<String, GpsMessage> template) {
     this.template = template;
   }
 
   @PostMapping("/")
-  public void receiveHttpPostData(@RequestBody String body) {
+  public void receiveHttpPostData(@RequestBody GpsMessage body) {
     logger.info("Received data: {} at {}", body, new Date());
     produce("placeholder", body);
   }
 
   @Override
-  public void produce(String key, String message) {
+  public void produce(String key, GpsMessage message) {
     template.send(TOPIC, key, message);
   }
 }

@@ -1,5 +1,5 @@
 package com.choutianxius.hello_spring_kafka;
 
-public interface BaseConsumer {
-  abstract void consume(String key, String data);
+public interface BaseConsumer<K, V> {
+  abstract void consume(K key, V data);
 }

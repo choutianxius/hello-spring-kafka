@@ -8,14 +8,14 @@ import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PhysicalStatusFetcher implements BaseConsumer {
+public class PhysicalStatusFetcher implements BaseConsumer<String, GpsMessage> {
   private static final String TOPIC = "gps";
   private static final String GROUP_ID = "physical_status";
   private static final Logger logger = LoggerFactory.getLogger(PhysicalStatusFetcher.class);
 
   @Override
   @KafkaListener(topics = TOPIC, groupId = GROUP_ID)
-  public void consume(@Header(KafkaHeaders.RECEIVED_KEY) String key, String message) {
+  public void consume(@Header(KafkaHeaders.RECEIVED_KEY) String key, GpsMessage message) {
     // TODO: Fetch physical status data from third-party S3 buckets
     logger.info("Physical status consumer received {}: {}", key, message);
   }

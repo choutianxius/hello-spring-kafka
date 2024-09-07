@@ -8,14 +8,14 @@ import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Component;
 
 @Component
-public class WeatherForecastFetcher implements BaseConsumer {
+public class WeatherForecastFetcher implements BaseConsumer<String, GpsMessage> {
   private static final String TOPIC = "gps";
   private static final String GROUP_ID = "weather_forecast";
   private static final Logger logger = LoggerFactory.getLogger(WeatherForecastFetcher.class);
 
   @Override
   @KafkaListener(topics = TOPIC, groupId = GROUP_ID)
-  public void consume(@Header(KafkaHeaders.RECEIVED_KEY) String key, String message) {
+  public void consume(@Header(KafkaHeaders.RECEIVED_KEY) String key, GpsMessage message) {
     // TODO: Fetch weather forecast from third-party REST API endpoint
     logger.info("Weather forecast consumer received {}: {}", key, message);
   }
