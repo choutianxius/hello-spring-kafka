@@ -32,8 +32,9 @@ public class KafkaConfig {
   }
 
   @Bean
-  public KafkaTemplate<String, GpsMessage> kafkaTemplate() {
-    return new KafkaTemplate<>(producerFactory());
+  public KafkaTemplate<String, GpsMessage> kafkaTemplate(
+      ProducerFactory<String, GpsMessage> producerFactory) {
+    return new KafkaTemplate<>(producerFactory);
   }
 
   @Bean
@@ -46,10 +47,10 @@ public class KafkaConfig {
 
   @Bean
   public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, GpsMessage>>
-      kafkaListenerContainerFactory() {
+      kafkaListenerContainerFactory(ConsumerFactory<String, GpsMessage> consumerFactory) {
     ConcurrentKafkaListenerContainerFactory<String, GpsMessage> factory =
         new ConcurrentKafkaListenerContainerFactory<>();
-    factory.setConsumerFactory(consumerFactory());
+    factory.setConsumerFactory(consumerFactory);
     return factory;
   }
 }

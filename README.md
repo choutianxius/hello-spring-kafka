@@ -12,4 +12,7 @@ This project implements such a system using [Spring for Apache Kafka](https://sp
 
 - [x] Define models for messages and implement serialization
 - [ ] Implement interaction with Redis
+    - [x] Set up connection. All configuration is done by Spring Boot.
+    - [ ] Data structure modeling and specific behavior
 - [ ] Implement interaction with DynamoDB
+- [ ] Implement authentication and authorization
